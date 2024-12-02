@@ -1,38 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>P2P File Sharing</title>
-  <link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Temp File Hosting Service</title>
 </head>
+
 <body>
-  <div class="container">
-    <h1>P2P File Sharing</h1>
+    <div class="container">
+        <h1>Temp File Hosting Service</h1>
+        <!-- Main Menu -->
+        <div id="main-menu">
+            <button id="host-btn">Host a File</button>
+            <button id="download-btn">Download a File</button>
+        </div>
 
-    <!-- Host Section -->
-    <div id="host-section" class="section">
-      <h2>Host a File</h2>
-      <input type="file" id="fileInput" class="file-input">
-      <br>
-      <textarea id="offer" class="metadata" placeholder="Copy this offer"></textarea>
-      <button id="createOffer" class="button">Create Offer</button>
+        <!-- Hosting Interface -->
+        <div id="host-interface" class="hidden">
+            <h2>Host a File</h2>
+            <input type="file" id="file-input" accept="*/*">
+            <p id="hosting-status" class="hidden">
+                <span id="status-icon" class="hidden">&#x1F7E2;</span> <!-- Green circle emoji -->
+                Hosting as PIN: <span id="generated-pin"></span>
+            </p>
+            <button id="back-to-main-host">Back</button>
+        </div>
+
+        <!-- Downloading Interface -->
+        <div id="download-interface" class="hidden">
+            <h2>Download a File</h2>
+            <label for="pin-input">Enter PIN:</label>
+            <input type="text" id="pin-input" placeholder="Enter PIN here">
+            <button id="connect-btn">Connect</button>
+            <button id="back-to-main-download">Back</button>
+            <p id="status" class="status-message"></p>
+            <a id="download-link" class="hidden" href="" download="received-file">Download File</a>
+        </div>
+
+        <!-- Error/Debug Messages -->
+        <div id="error-container" class="hidden">
+            <h3>Debug Messages</h3>
+            <pre id="error-log"></pre>
+        </div>
     </div>
 
-    <!-- Downloader Section -->
-    <div id="downloader-section" class="section">
-      <h2>Download a File</h2>
-      <textarea id="answer" class="metadata" placeholder="Paste the offer here"></textarea>
-      <button id="connect" class="button">Connect</button>
-    </div>
-
-    <!-- Status Display -->
-    <div id="status" class="status">
-      <p>Connection status will be displayed here.</p>
-    </div>
-  </div>
-
-  <script src="js/ui.js"></script>
-  <script src="js/webrtc.js"></script>
+    <!-- Include PeerJS and JavaScript -->
+    <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+    <script src="js/peer.js"></script>
 </body>
+
 </html>
