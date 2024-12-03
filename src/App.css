@@ -23,16 +23,8 @@ button {
   cursor: pointer;
 }
 
-.hidden {
-  display: none;
-}
-
-#hosting-status {
-  margin-top: 20px;
-  font-size: 18px;
-}
-
-#status-icon {
-  font-size: 24px;
-  margin-right: 10px;
+input {
+  padding: 10px;
+  margin: 10px;
+  font-size: 16px;
 }
