@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const HostFile = ({ peer, generatedPin, setStatusMessage, onBackClick }) => {
+const HostPage = ({ peer, generatedPin, setStatusMessage, onBackClick }) => {
   const [file, setFile] = useState(null);
   const [hostingStatus, setHostingStatus] = useState(false);
 
@@ -9,7 +9,7 @@ const HostFile = ({ peer, generatedPin, setStatusMessage, onBackClick }) => {
     setHostingStatus(true);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     peer.on("connection", (conn) => {
       conn.on("open", () => {
         setStatusMessage("A user has connected!");
@@ -28,17 +28,27 @@ const HostFile = ({ peer, generatedPin, setStatusMessage, onBackClick }) => {
   }, [peer, file, setStatusMessage]);
 
   return (
-    <div className="host-interface">
-      <h2>Host a File</h2>
-      <input type="file" onChange={handleFileChange} />
+    <div className="text-center">
+      <h2 className="mb-4">Host a File</h2>
+      <div className="mb-3">
+        <input
+          type="file"
+          className="form-control"
+          onChange={handleFileChange}
+        />
+      </div>
       {hostingStatus && (
-        <p>
-          Hosting as PIN: <strong>{generatedPin}</strong>
+        <p className="alert alert-info">
+          Hosting as ID: <strong>{generatedPin}</strong>
         </p>
       )}
-      <button onClick={onBackClick}>Back</button>
+      <div>
+        <button className="btn btn-secondary me-2" onClick={onBackClick}>
+          Back
+        </button>
+      </div>
     </div>
   );
 };
 
-export default HostFile;
+export default HostPage;

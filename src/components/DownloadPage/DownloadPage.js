@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const DownloadFile = ({
+const DownloadPage = ({
   peer,
   connection,
   setConnection,
@@ -16,14 +16,14 @@ const DownloadFile = ({
     setConnection(conn);
 
     conn.on("open", () => {
-      setStatusMessage("Connected to host, waiting for file...");
+      setStatusMessage("Connected to host, starting download...");
     });
 
     conn.on("data", (data) => {
       if (data.fileName && data.fileData) {
         setFileData(data.fileData);
         setFileName(data.fileName);
-        setStatusMessage("File received! Click the button below to download.");
+        setStatusMessage("");
       }
     });
 
@@ -32,7 +32,8 @@ const DownloadFile = ({
     });
 
     conn.on("error", (err) => {
-      setStatusMessage(`Error: ${err.message}`);
+      console.error("Peer error:", err);
+      setStatusMessage(`Peer Error`);
     });
   };
 
@@ -48,23 +49,34 @@ const DownloadFile = ({
   };
 
   return (
-    <div className="download-interface">
-      <h2>Download a File</h2>
-      <input
-        type="text"
-        placeholder="Enter PIN here"
-        value={pin}
-        onChange={(e) => setPin(e.target.value)}
-      />
-      <button onClick={handleConnect}>Connect</button>
-      <button onClick={onBackClick}>Back</button>
+    <div className="text-center">
+      <h2 className="mb-4">Download a File</h2>
+      <div className="mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Enter ID here"
+          value={pin}
+          onChange={(e) => setPin(e.target.value)}
+        />
+      </div>
+      <div className="mb-3">
+        <button className="btn btn-primary me-2" onClick={handleConnect}>
+          Connect
+        </button>
+        <button className="btn btn-secondary" onClick={onBackClick}>
+          Back
+        </button>
+      </div>
       {fileData && (
-        <div>
-          <button onClick={handleDownload}>Download {fileName}</button>
+        <div className="mt-4">
+          <button className="btn btn-success" onClick={handleDownload}>
+            Download {fileName}
+          </button>
         </div>
       )}
     </div>
   );
 };
 
-export default DownloadFile;
+export default DownloadPage;

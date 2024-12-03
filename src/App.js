@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Peer from "peerjs";
 import MainMenu from "./components/MainMenu";
-import HostFile from "./components/HostFile";
-import DownloadFile from "./components/DownloadFile";
+import HostPage from "./components/HostPage/HostPage";
+import DownloadPage from "./components/DownloadPage/DownloadPage";
 import "./App.css";
 
 const App = () => {
@@ -12,17 +12,21 @@ const App = () => {
   const [generatedPin, setGeneratedPin] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
 
-  React.useEffect(() => {
+  useEffect(() => {
     peer.on("open", (id) => {
       setGeneratedPin(id);
-      console.log("Peer instance opened with ID:", id);
     });
 
     peer.on("error", (err) => {
       console.error("Peer error:", err);
-      setStatusMessage(`Error: ${err.message}`);
+      setStatusMessage(`Peer Error`);
     });
   }, [peer]);
+
+  const handleBack = () => {
+    setMenu("main");
+    setStatusMessage("");
+  }
 
   return (
     <div className="container">
@@ -33,20 +37,20 @@ const App = () => {
         />
       )}
       {menu === "host" && (
-        <HostFile
+        <HostPage
           peer={peer}
           generatedPin={generatedPin}
           setStatusMessage={setStatusMessage}
-          onBackClick={() => setMenu("main")}
+          onBackClick={() => handleBack()}
         />
       )}
       {menu === "download" && (
-        <DownloadFile
+        <DownloadPage
           peer={peer}
           connection={connection}
           setConnection={setConnection}
           setStatusMessage={setStatusMessage}
-          onBackClick={() => setMenu("main")}
+          onBackClick={() => handleBack()}
         />
       )}
       <p>{statusMessage}</p>

@@ -1,10 +1,14 @@
 import React from "react";
 
 const MainMenu = ({ onHostClick, onDownloadClick }) => (
-  <div className="main-menu">
-    <h1>Temp File Hosting Service</h1>
-    <button onClick={onHostClick}>Host a File</button>
-    <button onClick={onDownloadClick}>Download a File</button>
+  <div className="main-menu text-center">
+    <h1>Peer to Peer File Sharing</h1>
+    <button className="btn btn-success mx-2" onClick={onHostClick}>
+      Host a File
+    </button>
+    <button className="btn btn-primary mx-2" onClick={onDownloadClick}>
+      Download a File
+    </button>
   </div>
 );
 
