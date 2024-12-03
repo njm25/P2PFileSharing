@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/P2PFileSharing/static/css/main.858f63d7.css",
+    "main.js": "/P2PFileSharing/static/js/main.8d5b1e08.js",
+    "index.html": "/P2PFileSharing/index.html",
+    "main.858f63d7.css.map": "/P2PFileSharing/static/css/main.858f63d7.css.map",
+    "main.8d5b1e08.js.map": "/P2PFileSharing/static/js/main.8d5b1e08.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.858f63d7.css",
+    "static/js/main.8d5b1e08.js"
+  ]
+}
