@@ -1,6 +1,6 @@
 import React from "react";
 
-const MainMenu = ({ onHostClick, onDownloadClick }) => (
+const OptionsPage = ({ onHostClick, onDownloadClick }) => (
   <div className="main-menu text-center">
     <h1>Peer to Peer File Sharing</h1>
     <button className="btn btn-success mx-2" onClick={onHostClick}>
@@ -12,4 +12,4 @@ const MainMenu = ({ onHostClick, onDownloadClick }) => (
   </div>
 );
 
-export default MainMenu;
+export default OptionsPage;
